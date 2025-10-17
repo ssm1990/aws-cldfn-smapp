@@ -100,3 +100,11 @@ Resources:
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSCodePipelineServiceRole
+      Policies:
+        - PolicyName: CodeConnectionsPolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - codeconnections:UseConnection
+                Resource: arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563
