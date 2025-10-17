@@ -117,5 +117,5 @@ Resources:
                 Resource: '*'
               - Effect: Allow
                 Action:
-                  - codeconnections:UseConnection
+                  - codestar-connections:UseConnection
                 Resource: !Ref ConnectionArn
