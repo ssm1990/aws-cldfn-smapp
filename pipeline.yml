@@ -62,20 +62,19 @@ Resources:
                 BranchName: main
               OutputArtifacts:
                 - Name: SourceOutput
-        - Name: Build
+        - Name: Deploy
           Actions:
-            - Name: BuildAction
+            - Name: DeployAction
               ActionTypeId:
-                Category: Build
+                Category: Deploy
                 Owner: AWS
-                Provider: CodeBuild
+                Provider: S3
                 Version: '1'
               Configuration:
-                ProjectName: !Ref CodeBuildProject
+                BucketName: !Ref WebsiteBucketName
+                Extract: true
               InputArtifacts:
                 - Name: SourceOutput
-              OutputArtifacts:
-                - Name: BuildOutput
 
   CodeBuildRole:
     Type: AWS::IAM::Role
