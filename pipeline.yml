@@ -43,10 +43,14 @@ Resources:
             - Name: SourceAction
               ActionTypeId:
                 Category: Source
-                Owner: ThirdParty
+                Owner: AWS
                 Provider: GitHub
                 Version: '1'
               Configuration:
+                ConnectionArn: arn:aws:codeconnections:ap-south-1:314129306412:connection/20b824e1-13a6-4583-9295-2d6156bdc34
+                FullRepositoryId: https://github.com/ssm1990/aws-cldfn-smapp
+                BranchName: main
+                DetectChanges: true
                 Owner: !Ref GitHubOwner
                 Repo: !Ref GitHubRepo
                 Branch: main
