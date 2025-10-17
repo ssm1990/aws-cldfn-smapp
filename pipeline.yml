@@ -114,5 +114,8 @@ Resources:
                   - s3:GetObjectVersion
                   - s3:PutObject
                   - s3:ListBucket
-                  - codeconnections:UseConnection
                 Resource: '*'
+              - Effect: Allow
+                Action:
+                  - codeconnections:UseConnection
+                Resource: !Ref ConnectionArn
