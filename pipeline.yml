@@ -47,7 +47,7 @@ Resources:
                 Provider: GitHub
                 Version: '1'
               Configuration:
-                ConnectionArn: arn:aws:codeconnections:ap-south-1:314129306412:connection/20b824e1-13a6-4583-9295-2d6156bdc34
+                ConnectionArn: arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563
                 FullRepositoryId: https://github.com/ssm1990/aws-cldfn-smapp
                 BranchName: main
                 DetectChanges: true
