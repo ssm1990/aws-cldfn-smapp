@@ -4,10 +4,10 @@ Description: 'CodePipeline for CI/CD'
 Parameters:
   GitHubRepo:
     Type: String
-    Default: 'your-repo-name'
+    Default: 'aws-cldfn-smapp'
   GitHubOwner:
     Type: String
-    Default: 'your-github-username'
+    Default: 'ssm1990'
 
 Resources:
   CodeBuildProject:
