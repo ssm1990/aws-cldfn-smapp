@@ -89,6 +89,7 @@ Resources:
             Principal:
               Service: codepipeline.amazonaws.com
             Action: sts:AssumeRole
+<<<<<<< HEAD
       Policies:
         - PolicyName: CodePipelinePolicy
           PolicyDocument:
@@ -100,3 +101,8 @@ Resources:
                   - s3:GetObject
                   - s3:PutObject
                 Resource: '*'
+=======
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSCodePipeline_FullAccess
+        - arn:aws:iam::aws:policy/AWSCodeBuild_FullAccess
+>>>>>>> da3d0e38f58671c535c464981b29e86008adcbd5
