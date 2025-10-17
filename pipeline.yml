@@ -99,6 +99,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - s3:ListBucket
+                  - s3:GetBucketLocation
                 Resource: !Sub 'arn:aws:s3:::${WebsiteBucketName}'
               - Effect: Allow
                 Action:
@@ -109,10 +110,12 @@ Resources:
               - Effect: Allow
                 Action:
                   - s3:ListBucket
+                  - s3:GetBucketLocation
                 Resource: !GetAtt ArtifactStore.Arn
               - Effect: Allow
                 Action:
                   - s3:GetObject
+                  - s3:GetObjectVersion
                   - s3:PutObject
                 Resource: !Sub '${ArtifactStore.Arn}/*'
 
