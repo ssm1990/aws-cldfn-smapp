@@ -44,16 +44,12 @@ Resources:
               ActionTypeId:
                 Category: Source
                 Owner: AWS
-                Provider: GitHub
+                Provider: CodeStarSourceConnection
                 Version: '1'
               Configuration:
                 ConnectionArn: arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563
-                FullRepositoryId: https://github.com/ssm1990/aws-cldfn-smapp
+                FullRepositoryId: !Sub '${GitHubOwner}/${GitHubRepo}'
                 BranchName: main
-                DetectChanges: true
-                Owner: !Ref GitHubOwner
-                Repo: !Ref GitHubRepo
-                Branch: main
               OutputArtifacts:
                 - Name: SourceOutput
         - Name: Build
