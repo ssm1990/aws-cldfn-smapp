@@ -11,6 +11,9 @@ Parameters:
   ConnectionArn:
     Type: String
     Default: 'arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563'
+  WebsiteBucketName:
+    Type: String
+    Description: 'Name of the S3 bucket hosting the website (from infrastructure stack)'
 
 Resources:
   CodeBuildProject:
@@ -23,6 +26,10 @@ Resources:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/standard:7.0
+        EnvironmentVariables:
+          - Name: WEBSITE_BUCKET
+            Type: PLAINTEXT
+            Value: !Ref WebsiteBucketName
       Source:
         Type: CODEPIPELINE
         BuildSpec: buildspec.yml
@@ -88,9 +95,17 @@ Resources:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !Sub 'arn:aws:s3:::${WebsiteBucketName}'
+              - Effect: Allow
+                Action:
                   - s3:GetObject
                   - s3:PutObject
-                Resource: '*'
+                  - s3:DeleteObject
+                Resource: !Sub 'arn:aws:s3:::${WebsiteBucketName}/*'
 
   CodePipelineRole:
     Type: AWS::IAM::Role

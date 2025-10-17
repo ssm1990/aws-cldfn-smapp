@@ -3,11 +3,18 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 18
   build:
     commands:
       - echo Build started on `date`
       - echo Building the application
+      - |
+        if [ -n "$WEBSITE_BUCKET" ]; then
+          echo "Syncing to s3://$WEBSITE_BUCKET";
+          aws s3 sync . s3://$WEBSITE_BUCKET --delete --cache-control max-age=60;
+        else
+          echo "WEBSITE_BUCKET not set; skipping deploy step";
+        fi
   post_build:
     commands:
       - echo Build completed on `date`
