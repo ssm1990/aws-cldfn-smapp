@@ -24,10 +24,19 @@ Resources:
         Type: CODEPIPELINE
         BuildSpec: buildspec.yml
 
+  ArtifactStore:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+
   CodePipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
       RoleArn: !GetAtt CodePipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactStore
       Stages:
         - Name: Source
           Actions:
