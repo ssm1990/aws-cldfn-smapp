@@ -111,13 +111,13 @@ Resources:
                 Action:
                   - s3:ListBucket
                   - s3:GetBucketLocation
-                Resource: !GetAtt ArtifactStore.Arn
+                Resource: !Sub 'arn:aws:s3:::${ArtifactStore}'
               - Effect: Allow
                 Action:
                   - s3:GetObject
                   - s3:GetObjectVersion
                   - s3:PutObject
-                Resource: !Sub '${ArtifactStore.Arn}/*'
+                Resource: !Sub 'arn:aws:s3:::${ArtifactStore}/*'
 
   CodePipelineRole:
     Type: AWS::IAM::Role
