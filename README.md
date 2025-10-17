@@ -44,6 +44,41 @@ Update the following parameters in `pipeline.yml`:
 - `GitHubOwner`: Your GitHub username(ssm1990)
 - `GitHubRepo`: Your repository name(aws-cldfn-smapp)
 
+## Verify CodeStar Connection & Redeploy
+
+### Quick checklist
+- Ensure the CodeStar connection shows status **Available** in the AWS Console (Developer Tools → Connections). If it is **Pending**, complete the GitHub handshake.
+- Confirm the connection, the pipeline, and your CLI region are all **us-east-1**.
+- Make sure the pipeline's role is the one created by `pipeline.yml` and now includes `codestar-connections:UseConnection` on the provided `ConnectionArn`.
+- If using a different account for the connection, add a resource policy on the connection to allow the pipeline role to `codestar-connections:UseConnection`.
+
+### Redeploy/update the pipeline stack
+```bash
+aws cloudformation update-stack \
+  --stack-name static-web-pipeline \
+  --template-body file://pipeline.yml \
+  --parameters \
+    ParameterKey=GitHubOwner,ParameterValue=ssm1990 \
+    ParameterKey=GitHubRepo,ParameterValue=aws-cldfn-smapp \
+    ParameterKey=ConnectionArn,ParameterValue=arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563 \
+  --capabilities CAPABILITY_IAM
+
+# If the stack doesn't exist yet, use create-stack instead of update-stack
+# aws cloudformation create-stack \
+#   --stack-name static-web-pipeline \
+#   --template-body file://pipeline.yml \
+#   --parameters \
+#     ParameterKey=GitHubOwner,ParameterValue=ssm1990 \
+#     ParameterKey=GitHubRepo,ParameterValue=aws-cldfn-smapp \
+#     ParameterKey=ConnectionArn,ParameterValue=arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563 \
+#   --capabilities CAPABILITY_IAM
+```
+
+### Retry the pipeline
+```bash
+aws codepipeline start-pipeline-execution --name static-web-pipeline
+```
+
 ## Features
 
 - Automated deployment on code changes
