@@ -102,5 +102,5 @@ Resources:
               Service: codepipeline.amazonaws.com
             Action: sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AWSCodePipelineServiceRole
+        - arn:aws:iam::aws:policy/AWSCodePipelineFullAccess
         - arn:aws:iam::aws:policy/AWSCodeStarFullAccess
