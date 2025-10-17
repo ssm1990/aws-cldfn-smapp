@@ -108,4 +108,5 @@ Resources:
                   - codebuild:StartBuild
                   - s3:GetObject
                   - s3:PutObject
+                  - codeconnections:UseConnection
                 Resource: '*'
