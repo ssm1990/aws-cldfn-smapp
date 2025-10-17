@@ -80,6 +80,7 @@ Resources:
   CodeBuildRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: !Sub '${AWS::StackName}-CodeBuildRole-v2'
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
