@@ -4,10 +4,10 @@ Description: 'CodePipeline for CI/CD'
 Parameters:
   GitHubRepo:
     Type: String
-    Default: 'your-repo-name'
+    Default: 'aws-cldfn-smapp'
   GitHubOwner:
     Type: String
-    Default: 'your-github-username'
+    Default: 'ssm1990'
 
 Resources:
   CodeBuildProject:
@@ -67,8 +67,18 @@ Resources:
             Principal:
               Service: codebuild.amazonaws.com
             Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+      Policies:
+        - PolicyName: CodeBuildPolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource: '*'
 
   CodePipelineRole:
     Type: AWS::IAM::Role
@@ -79,5 +89,14 @@ Resources:
             Principal:
               Service: codepipeline.amazonaws.com
             Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AWSCodePipelineFullAccess
+      Policies:
+        - PolicyName: CodePipelinePolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - codebuild:BatchGetBuilds
+                  - codebuild:StartBuild
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource: '*'

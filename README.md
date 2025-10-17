@@ -41,8 +41,8 @@ aws cloudformation create-stack \
 ## Configuration
 
 Update the following parameters in `pipeline.yml`:
-- `GitHubOwner`: Your GitHub username
-- `GitHubRepo`: Your repository name
+- `GitHubOwner`: Your GitHub username(ssm1990)
+- `GitHubRepo`: Your repository name(aws-cldfn-smapp)
 
 ## Features
 
