@@ -30,12 +30,16 @@ aws cloudformation create-stack \
 
 ### 2. Deploy Pipeline
 ```bash
-aws cloudformation create-stack \
-  --stack-name static-web-pipeline \
-  --template-body file://pipeline.yml \
-  --parameters ParameterKey=GitHubOwner,ParameterValue=your-username \
-               ParameterKey=GitHubRepo,ParameterValue=your-repo-name \
-  --capabilities CAPABILITY_IAM
+aws cloudformation create-stack `
+  --stack-name static-web-pipeline `
+  --template-body file://pipeline.yml `
+  --parameters `
+    ParameterKey=GitHubOwner,ParameterValue=ssm1990 `
+    ParameterKey=GitHubRepo,ParameterValue=aws-cldfn-smapp `
+    ParameterKey=ConnectionArn,ParameterValue=arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563 `
+    ParameterKey=WebsiteBucketName,ParameterValue=<PASTE_BUCKET_NAME_HERE> `
+  --capabilities CAPABILITY_NAMED_IAM `
+  --region us-east-1
 ```
 
 ## Configuration
@@ -61,18 +65,7 @@ aws cloudformation update-stack \
     ParameterKey=GitHubOwner,ParameterValue=ssm1990 \
     ParameterKey=GitHubRepo,ParameterValue=aws-cldfn-smapp \
     ParameterKey=ConnectionArn,ParameterValue=arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563 \
-  --capabilities CAPABILITY_IAM
-
-# If the stack doesn't exist yet, use create-stack instead of update-stack
-# aws cloudformation create-stack \
-#   --stack-name static-web-pipeline \
-#   --template-body file://pipeline.yml \
-#   --parameters \
-#     ParameterKey=GitHubOwner,ParameterValue=ssm1990 \
-#     ParameterKey=GitHubRepo,ParameterValue=aws-cldfn-smapp \
-#     ParameterKey=ConnectionArn,ParameterValue=arn:aws:codeconnections:us-east-1:314129306412:connection/7cb1995b-1b7e-4fa1-8b87-697b6d903563 \
-#   --capabilities CAPABILITY_IAM
-```
+  --capabilities CAPABILITY_NAMED_IAM
 
 ### Retry the pipeline
 ```bash
